@@ -1,0 +1,299 @@
+/* ────────────────────────────────────────────────────────────────────────────
+   content-styles.css — SegmentSaver YouTube overlay styles
+   ──────────────────────────────────────────────────────────────────────────── */
+
+/* ── CSS Custom Properties ── */
+:root {
+  --ss-red: #ff3b5c;
+  --ss-green: #00e676;
+  --ss-blue: #3b82f6;
+  --ss-bg: rgba(10, 10, 15, 0.92);
+  --ss-surface: rgba(255, 255, 255, 0.06);
+  --ss-border: rgba(255, 255, 255, 0.12);
+  --ss-text: #f1f1f1;
+  --ss-muted: rgba(241, 241, 241, 0.5);
+  --ss-radius: 12px;
+  --ss-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --ss-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Main Overlay Container ── */
+#ss-overlay {
+  position: absolute;
+  bottom: 72px;
+  left: 16px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: var(--ss-font);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#ss-overlay.ss-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Control Panel ── */
+#ss-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--ss-bg);
+  border: 1px solid var(--ss-border);
+  border-radius: var(--ss-radius);
+  padding: 8px 12px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--ss-shadow);
+  pointer-events: all;
+  user-select: none;
+}
+
+/* ── Buttons ── */
+.ss-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--ss-font);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  outline: none;
+}
+
+.ss-btn:active {
+  transform: scale(0.95);
+}
+
+.ss-btn-start {
+  background: rgba(0, 230, 118, 0.15);
+  border: 1px solid rgba(0, 230, 118, 0.4);
+  color: var(--ss-green);
+}
+
+.ss-btn-start:hover {
+  background: rgba(0, 230, 118, 0.25);
+  border-color: var(--ss-green);
+  box-shadow: 0 0 12px rgba(0, 230, 118, 0.3);
+}
+
+.ss-btn-start.ss-active {
+  background: var(--ss-green);
+  color: #000;
+  box-shadow: 0 0 16px rgba(0, 230, 118, 0.5);
+}
+
+.ss-btn-end {
+  background: rgba(255, 59, 92, 0.15);
+  border: 1px solid rgba(255, 59, 92, 0.4);
+  color: var(--ss-red);
+}
+
+.ss-btn-end:hover {
+  background: rgba(255, 59, 92, 0.25);
+  border-color: var(--ss-red);
+  box-shadow: 0 0 12px rgba(255, 59, 92, 0.3);
+}
+
+.ss-btn-end:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ss-btn-save {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: var(--ss-blue);
+}
+
+.ss-btn-save:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: var(--ss-blue);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+}
+
+.ss-btn-save:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Divider ── */
+.ss-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--ss-border);
+  flex-shrink: 0;
+}
+
+/* ── Timestamp Display ── */
+#ss-timestamp-display {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--ss-muted);
+  min-width: 120px;
+}
+
+#ss-timestamp-display .ss-time-badge {
+  background: var(--ss-surface);
+  border: 1px solid var(--ss-border);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--ss-text);
+  font-weight: 600;
+}
+
+#ss-timestamp-display .ss-time-badge.ss-start-set {
+  border-color: rgba(0, 230, 118, 0.5);
+  color: var(--ss-green);
+}
+
+#ss-timestamp-display .ss-time-badge.ss-end-set {
+  border-color: rgba(255, 59, 92, 0.5);
+  color: var(--ss-red);
+}
+
+.ss-arrow {
+  color: var(--ss-muted);
+  font-size: 10px;
+}
+
+/* ── Duration Badge ── */
+#ss-duration-badge {
+  font-size: 10px;
+  color: var(--ss-muted);
+  background: var(--ss-surface);
+  border: 1px solid var(--ss-border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Keyboard Hint ── */
+#ss-kb-hint {
+  font-size: 10px;
+  color: var(--ss-muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ss-key {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid var(--ss-border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-family: monospace;
+  font-size: 10px;
+  color: var(--ss-text);
+}
+
+/* ── Toast Notification ── */
+#ss-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ss-bg);
+  border: 1px solid var(--ss-border);
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-family: var(--ss-font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ss-text);
+  z-index: 99999;
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--ss-shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+#ss-toast.ss-toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+#ss-toast.ss-toast-success { border-color: rgba(0, 230, 118, 0.4); }
+#ss-toast.ss-toast-error { border-color: rgba(255, 59, 92, 0.4); }
+#ss-toast.ss-toast-info { border-color: rgba(59, 130, 246, 0.4); }
+
+/* ── Progress Bar Markers ── */
+.ss-progress-marker {
+  position: absolute;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--ss-red);
+  border-radius: 2px;
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.ss-progress-marker::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 7px;
+  height: 7px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.ss-progress-segment {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background: rgba(255, 59, 92, 0.35);
+  pointer-events: none;
+  z-index: 9;
+}
+
+/* ── Toggle Button (show/hide overlay) ── */
+#ss-toggle-btn {
+  position: absolute;
+  bottom: 72px;
+  right: 80px;
+  z-index: 9998;
+  width: 32px;
+  height: 32px;
+  background: var(--ss-bg);
+  border: 1px solid var(--ss-border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--ss-shadow);
+  transition: all 0.2s ease;
+  pointer-events: all;
+  font-size: 14px;
+}
+
+#ss-toggle-btn:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.25);
+}

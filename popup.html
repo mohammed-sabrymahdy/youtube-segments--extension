@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SegmentSaver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="dark">
+
+  <!-- ── Header ── -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="app-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L2 7l10 5 10-5-10-5z" fill="var(--accent)"/>
+          <path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <h1 class="app-title">SegmentSaver</h1>
+        <p class="app-subtitle" id="stats-line">Loading…</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-theme" title="Toggle theme">🌙</button>
+      <button class="icon-btn" id="btn-import" title="Import segments">⬆️</button>
+      <button class="icon-btn" id="btn-export" title="Export segments">⬇️</button>
+    </div>
+    <input type="file" id="import-file-input" accept=".json" style="display:none" />
+  </header>
+
+  <!-- ── Search & Filter Bar ── -->
+  <div class="filter-bar">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input
+        type="text"
+        id="search-input"
+        class="search-input"
+        placeholder="Search by title, channel, tag…"
+        autocomplete="off"
+      />
+      <button class="clear-search" id="clear-search" style="display:none">✕</button>
+    </div>
+    <div class="filter-chips" id="filter-chips">
+      <button class="chip chip-active" data-filter="all">All</button>
+      <button class="chip" data-filter="today">Today</button>
+      <button class="chip" data-filter="week">This Week</button>
+    </div>
+  </div>
+
+  <!-- ── Tag Filter Strip ── -->
+  <div class="tag-filter-row" id="tag-filter-row" style="display:none">
+    <span class="tag-filter-label">Tags:</span>
+    <div class="tag-filter-chips" id="tag-filter-chips"></div>
+    <button class="tag-clear-btn" id="tag-clear-btn">Clear</button>
+  </div>
+
+  <!-- ── Segments List ── -->
+  <main class="segments-container" id="segments-container">
+    <div class="empty-state" id="empty-state" style="display:none">
+      <div class="empty-icon">✂️</div>
+      <h3>No segments yet</h3>
+      <p>Go to a YouTube video and press <kbd>Alt+S</kbd> to start capturing.</p>
+    </div>
+    <div id="segments-list"></div>
+  </main>
+
+  <!-- ── Edit / Note Modal ── -->
+  <div class="modal-overlay" id="modal-overlay" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="modal-title">Edit Segment</h3>
+        <button class="modal-close" id="modal-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field-label">Notes</label>
+        <textarea id="modal-notes" class="modal-textarea" placeholder="Add a note about this segment…" rows="4"></textarea>
+
+        <label class="field-label" style="margin-top:14px">Tags <span class="field-hint">(comma separated)</span></label>
+        <input id="modal-tags" class="modal-input" type="text" placeholder="react, tutorial, important" />
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="modal-cancel">Cancel</button>
+        <button class="btn-primary" id="modal-save">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Toast ── -->
+  <div class="popup-toast" id="popup-toast"></div>
+
+  <script src="utils.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
