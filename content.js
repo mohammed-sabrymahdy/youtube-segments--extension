@@ -1,9 +1,4 @@
-/**
- * content.js — SegmentSaver YouTube Content Script
- * Injects the floating overlay UI onto YouTube video pages.
- * Handles segment start/end selection, progress bar markers,
- * and keyboard shortcuts.
- */
+
 
 (function () {
   'use strict';
